@@ -1,0 +1,16 @@
+[Unit]
+Description=Telegram Voice Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/telegram-voice
+ExecStart=/usr/bin/env ruby /opt/telegram-voice/bin/bot
+Restart=always
+RestartSec=5
+User=telegram
+Group=telegram
+
+[Install]
+WantedBy=multi-user.target
