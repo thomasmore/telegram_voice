@@ -84,6 +84,21 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now telegram-voice-bot
 ```
 
+Important: `systemd` reads the installed unit file from `/etc/systemd/system/telegram-voice-bot.service`, not the copy inside this repo. If you change `systemd/telegram-voice-bot.service` later, copy it again and reload `systemd` before restarting the service:
+
+```bash
+sudo cp systemd/telegram-voice-bot.service /etc/systemd/system/telegram-voice-bot.service
+sudo systemctl daemon-reload
+sudo systemctl restart telegram-voice-bot
+```
+
+To verify what `systemd` actually loaded:
+
+```bash
+sudo systemctl cat telegram-voice-bot
+sudo systemctl show -p FragmentPath -p ExecStart telegram-voice-bot
+```
+
 Check logs:
 
 ```bash
